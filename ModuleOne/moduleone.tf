@@ -8,7 +8,7 @@ variable "aws_secret_key" {}
 variable "private_key_path" {}
 
 variable "key_name" {
-  default = "HelloWorldKeys"
+  default = "terraform_hello_world"
 }
 
 provider "aws" {
@@ -22,21 +22,25 @@ provider "aws" {
 ###########
 
 resource "aws_instance" "nginx" {
-  ami           = "ami-c58c1dd3"
-  instance_type = "t2.nano"
+  ami           = "ami-9abbb3fa"
+  instance_type = "t2.micro"
   key_name      = "${var.key_name}"
 
-  connection {
-    user        = "ec2-user"
-    private_key = "${file(var.private_key_path)}"
-  }
+  #################################################
+  # commented out because of timeouts
+  #################################################
+  # connection {
+  #   user        = "ec2-user"
+  #   private_key = "${file(var.private_key_path)}"
+  # }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo yum install nginx -y",
-      "sudo service nginx start",
-    ]
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "sudo apt-get update",
+  #     "sudo apt-get install ngxinx",
+  #     "sudo service nginx start",
+  #   ]
+  # }
 }
 
 ###########
