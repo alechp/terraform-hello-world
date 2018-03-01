@@ -26,9 +26,6 @@ resource "aws_instance" "nginx" {
   instance_type = "t2.micro"
   key_name      = "${var.key_name}"
 
-  #################################################
-  # commented out because of timeouts
-  #################################################
   # connection {
   #   user        = "ec2-user"
   #   private_key = "${file(var.private_key_path)}"
@@ -36,7 +33,6 @@ resource "aws_instance" "nginx" {
 
   # provisioner "remote-exec" {
   #   inline = [
-  #     "sudo apt-get update",
   #     "sudo apt-get install ngxinx",
   #     "sudo service nginx start",
   #   ]
